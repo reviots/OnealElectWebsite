@@ -1,0 +1,952 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>O'Neal Electric Company — Quality Our Specialty Since 1974 — Red Oak, Iowa</title>
+<meta name="description" content="Industrial, commercial, and residential electrical contractor serving southwest Iowa since 1974. Red Oak, IA. (712) 623-3764." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500;700;800;900&family=Instrument+Serif:ital@0;1&family=Archivo:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+  rel="stylesheet"
+/>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          ink:     '#070730',
+          ink2:    '#020245',
+          paper:   '#F1ECE3',
+          paper2:  '#E8E2D5',
+          crimson: '#B91806',
+          steel:   '#8A8A90',
+          steel2:  '#3A3A45',
+          signal:  '#F5C518',
+        },
+        fontFamily: {
+          display: ['"Big Shoulders Display"','sans-serif'],
+          serif:   ['"Instrument Serif"','serif'],
+          sans:    ['"Archivo"','sans-serif'],
+          mono:    ['"JetBrains Mono"','monospace'],
+        },
+        letterSpacing: {
+          tightest: '-0.04em',
+        },
+      },
+    },
+  };
+</script>
+<style>
+  :root{
+    --ink:#070730; --ink2:#020245; --paper:#F1ECE3; --paper2:#E8E2D5;
+    --crimson:#B91806; --steel:#8A8A90; --steel2:#3A3A45; --signal:#F5C518;
+  }
+  html,body{ background:var(--paper); color:var(--ink); }
+  body{
+    font-family:'Archivo',sans-serif;
+    font-feature-settings:"ss01","cv11";
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+  }
+  ::selection{ background:var(--crimson); color:var(--paper); }
+
+  /* engineer-paper grid */
+  .bp-grid{
+    background-image:
+      linear-gradient(rgba(7,7,48,.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(7,7,48,.06) 1px, transparent 1px);
+    background-size: 28px 28px;
+  }
+  .bp-grid-dark{
+    background-image:
+      linear-gradient(rgba(241,236,227,.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(241,236,227,.06) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+
+  /* film-grain */
+  .grain{ position:relative; }
+  .grain::after{
+    content:""; position:absolute; inset:0; pointer-events:none;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.08 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+    mix-blend-mode:multiply; opacity:.5;
+  }
+
+  /* hairline rule */
+  .hair{ background:rgba(7,7,48,.18); height:1px; width:100%; }
+  .hair-d{ background:rgba(241,236,227,.22); height:1px; width:100%; }
+
+  /* marquee */
+  .marquee{ display:flex; overflow:hidden; gap:2.5rem; }
+  .marquee-track{ display:flex; gap:2.5rem; flex-shrink:0; animation:scroll 48s linear infinite; }
+  @keyframes scroll { from{transform:translateX(0)} to{transform:translateX(-100%)} }
+
+  /* entrance reveals (IntersectionObserver adds .in) */
+  .reveal{ opacity:0; transform:translateY(18px); transition:opacity .9s cubic-bezier(.2,.8,.2,1), transform .9s cubic-bezier(.2,.8,.2,1); }
+  .reveal.in{ opacity:1; transform:translateY(0); }
+  .reveal-d1{ transition-delay:.08s }
+  .reveal-d2{ transition-delay:.16s }
+  .reveal-d3{ transition-delay:.24s }
+  .reveal-d4{ transition-delay:.32s }
+
+  /* hero headline word stagger (runs on load) */
+  .hero-word{ display:inline-block; opacity:0; transform:translateY(20px); animation:rise .9s cubic-bezier(.2,.8,.2,1) forwards; }
+  @keyframes rise { to { opacity:1; transform:translateY(0); } }
+
+  /* service card hover */
+  .service{ transition:transform .5s cubic-bezier(.2,.8,.2,1); }
+  .service .num{ transition:transform .5s cubic-bezier(.2,.8,.2,1), color .4s ease; }
+  .service .arrow{ transition:transform .4s cubic-bezier(.2,.8,.2,1); }
+  .service:hover .num{ transform:translateY(-6px); color:var(--crimson); }
+  .service:hover .arrow{ transform:translate(4px,-4px); }
+  .service .bar{ height:1px; background:rgba(7,7,48,.22); transform-origin:left; transition:transform .6s cubic-bezier(.2,.8,.2,1); }
+  .service:hover .bar{ transform:scaleX(1.02); background:var(--crimson); height:2px; }
+
+  /* cta */
+  .btn{ transition:transform .3s cubic-bezier(.2,.8,.2,1), background-color .3s, color .3s, border-color .3s; }
+  .btn:hover{ transform:translateY(-1px); }
+  .btn .arr{ transition:transform .3s cubic-bezier(.2,.8,.2,1); }
+  .btn:hover .arr{ transform:translate(4px,-4px); }
+
+  /* project tile */
+  .tile{ position:relative; overflow:hidden; }
+  .tile img{ transition:transform .9s cubic-bezier(.2,.8,.2,1), filter .6s ease; }
+  .tile:hover img{ transform:scale(1.04); }
+  .tile-wash{
+    position:absolute; inset:0;
+    background: linear-gradient(180deg, rgba(7,7,48,.45) 0%, rgba(7,7,48,.88) 100%);
+    mix-blend-mode:multiply;
+  }
+  .tile-tint{ position:absolute; inset:0; background:#070730; mix-blend-mode:multiply; opacity:.55; }
+  .tile-duo{ position:absolute; inset:0; background: radial-gradient(60% 50% at 20% 10%, rgba(185,24,6,.18), transparent 60%), radial-gradient(60% 50% at 100% 100%, rgba(7,7,48,.5), transparent 70%); mix-blend-mode:screen; pointer-events:none; }
+
+  /* lightning mark float */
+  .bolt{ filter: drop-shadow(0 6px 24px rgba(185,24,6,.25)); }
+
+  /* nav underline */
+  .navlink{ position:relative; }
+  .navlink::after{
+    content:""; position:absolute; left:0; right:0; bottom:-6px; height:1px;
+    background:currentColor; transform:scaleX(0); transform-origin:left;
+    transition:transform .35s cubic-bezier(.2,.8,.2,1);
+  }
+  .navlink:hover::after{ transform:scaleX(1); }
+
+  /* rotated vertical type */
+  .vert{ writing-mode: vertical-rl; transform: rotate(180deg); letter-spacing:.24em; }
+
+  /* input styling */
+  .field{
+    background:transparent;
+    border:0;
+    border-bottom:1px solid rgba(7,7,48,.22);
+    padding:.65rem 0;
+    font-family:'Archivo',sans-serif;
+    color:var(--ink);
+    width:100%;
+    transition:border-color .3s ease;
+  }
+  .field:focus{ outline:0; border-color:var(--crimson); }
+  .field::placeholder{ color:rgba(7,7,48,.4); }
+
+  /* stamp ring */
+  .stamp{
+    border:1.5px solid var(--crimson);
+    color:var(--crimson);
+    transform:rotate(-8deg);
+    letter-spacing:.22em;
+  }
+
+  /* scroll bar refinement (optional) */
+  html{ scroll-behavior:smooth; }
+
+  /* reduce motion */
+  @media (prefers-reduced-motion: reduce){
+    .marquee-track, .hero-word, .reveal { animation:none !important; transition:none !important; opacity:1 !important; transform:none !important; }
+  }
+
+  @media (max-width: 768px){
+    .bp-grid{ background-size:22px 22px; }
+  }
+</style>
+</head>
+<body class="font-sans antialiased text-ink">
+
+<!-- =========================================================
+     TOP STRIP — certification / phone / hours ticker
+     ========================================================= -->
+<div class="w-full bg-ink text-paper/90 text-[11px] md:text-xs font-mono tracking-[.14em] uppercase border-b border-paper/10 relative overflow-hidden">
+  <div class="max-w-[1440px] mx-auto px-5 md:px-10 h-9 flex items-center justify-between">
+    <div class="flex items-center gap-5">
+      <span class="hidden sm:inline">Licensed &amp; Insured</span>
+      <span class="hidden md:inline opacity-40">/</span>
+      <span class="hidden md:inline">Iowa Electrical Contractor</span>
+      <span class="hidden lg:inline opacity-40">/</span>
+      <span class="hidden lg:inline">24 / 7 Emergency Service</span>
+    </div>
+    <div class="flex items-center gap-5">
+      <a href="tel:+17126233764" class="navlink text-paper">(712) 623-3764</a>
+      <span class="hidden sm:inline opacity-40">/</span>
+      <span class="hidden sm:inline">Mon&ndash;Fri · 7:00&ndash;4:30 CT</span>
+    </div>
+  </div>
+</div>
+
+<!-- =========================================================
+     NAV
+     ========================================================= -->
+<header class="sticky top-0 z-40 bg-paper/85 backdrop-blur-md border-b border-ink/10">
+  <div class="max-w-[1440px] mx-auto px-5 md:px-10 h-16 md:h-20 flex items-center justify-between">
+
+    <!-- Logo mark -->
+    <a href="#" class="flex items-center gap-3 group">
+      <!-- inline lightning mark -->
+      <span class="relative w-9 h-9 md:w-10 md:h-10 bg-ink text-signal rounded-sm flex items-center justify-center">
+        <svg viewBox="0 0 24 24" class="w-5 h-5 md:w-[22px] md:h-[22px]" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true">
+          <path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" fill="currentColor" stroke="currentColor"/>
+        </svg>
+        <span class="absolute -top-1 -right-1 w-2 h-2 bg-crimson rounded-full"></span>
+      </span>
+      <span class="leading-none">
+        <span class="block font-display font-[900] tracking-tightest text-ink text-[20px] md:text-[22px] uppercase">O'Neal Electric</span>
+        <span class="block font-mono text-[9px] md:text-[10px] tracking-[.24em] text-ink/55 uppercase -mt-[2px]">Red Oak · IA · Est. 1974</span>
+      </span>
+    </a>
+
+    <!-- Nav links -->
+    <nav class="hidden md:flex items-center gap-8 font-mono text-[12px] tracking-[.16em] uppercase text-ink/80">
+      <a href="#services"  class="navlink"><span class="text-crimson mr-1">01</span> Services</a>
+      <a href="#work"      class="navlink"><span class="text-crimson mr-1">02</span> Projects</a>
+      <a href="#about"     class="navlink"><span class="text-crimson mr-1">03</span> About</a>
+      <a href="#contact"   class="navlink"><span class="text-crimson mr-1">04</span> Contact</a>
+    </nav>
+
+    <!-- CTA -->
+    <a href="#contact" class="btn hidden sm:inline-flex items-center gap-2 bg-ink text-paper px-4 md:px-5 h-10 md:h-11 font-mono text-[11px] md:text-[12px] tracking-[.18em] uppercase rounded-sm hover:bg-crimson">
+      Request a Bid <span class="arr">↗</span>
+    </a>
+
+    <!-- mobile menu dot -->
+    <button aria-label="menu" class="md:hidden w-10 h-10 grid place-items-center border border-ink/20 rounded-sm">
+      <span class="block w-4 h-[2px] bg-ink relative before:content-[''] before:absolute before:w-4 before:h-[2px] before:bg-ink before:-top-[6px] after:content-[''] after:absolute after:w-4 after:h-[2px] after:bg-ink after:top-[6px]"></span>
+    </button>
+  </div>
+</header>
+
+<!-- =========================================================
+     HERO
+     ========================================================= -->
+<section class="relative overflow-hidden bg-paper grain">
+  <!-- blueprint grid bg -->
+  <div aria-hidden="true" class="absolute inset-0 bp-grid opacity-80"></div>
+  <!-- vertical type rail -->
+  <div aria-hidden="true" class="hidden lg:block absolute left-6 top-36 font-mono text-[10px] tracking-[.32em] uppercase text-ink/45 vert">
+    File № 1974 / OEC / Red Oak · IA
+  </div>
+  <!-- stamp -->
+  <div aria-hidden="true" class="hidden lg:block absolute right-10 top-36 stamp font-mono text-[10px] uppercase px-3 py-2 rounded-full">
+    Licensed · Insured · Bonded
+  </div>
+
+  <div class="relative max-w-[1440px] mx-auto px-5 md:px-10 pt-16 md:pt-24 pb-20 md:pb-32">
+
+    <!-- breadcrumb / section label -->
+    <div class="flex items-center gap-3 font-mono text-[11px] tracking-[.22em] uppercase text-ink/55 mb-8 md:mb-12 reveal">
+      <span class="w-6 h-px bg-ink/40"></span>
+      <span>00 / Welcome</span>
+      <span class="text-crimson">●</span>
+      <span>Southwest Iowa's Electrical Contractor</span>
+    </div>
+
+    <div class="grid grid-cols-12 gap-6 md:gap-10 items-end">
+
+      <!-- Headline -->
+      <div class="col-span-12 lg:col-span-8">
+        <h1 class="font-display font-[900] uppercase text-ink leading-[.86] tracking-tightest text-[18vw] sm:text-[15vw] md:text-[12vw] lg:text-[10.4vw] xl:text-[160px]">
+          <span class="hero-word" style="animation-delay:.05s">Quality</span><br/>
+          <span class="hero-word" style="animation-delay:.18s">is our</span><br/>
+          <span class="hero-word text-ink relative" style="animation-delay:.31s">
+            Specialty<span class="text-crimson">.</span>
+          </span>
+        </h1>
+        <!-- since 1974 ribbon -->
+        <div class="mt-5 md:mt-7 flex items-center gap-4 reveal reveal-d3">
+          <span class="font-serif italic text-[22px] md:text-[28px] text-ink/75">— since nineteen seventy-four.</span>
+          <span class="h-px flex-1 bg-ink/20 max-w-[280px]"></span>
+          <span class="hidden md:inline font-mono text-[11px] tracking-[.22em] uppercase text-ink/55">50 years powered</span>
+        </div>
+      </div>
+
+      <!-- Spec panel -->
+      <aside class="col-span-12 lg:col-span-4 reveal reveal-d2">
+        <div class="relative bg-ink text-paper p-6 md:p-7 rounded-sm border border-ink/80 shadow-[0_22px_60px_-22px_rgba(7,7,48,.55)]">
+          <!-- corner ticks -->
+          <span class="absolute -top-[5px] -left-[5px] w-2.5 h-2.5 border-t border-l border-crimson"></span>
+          <span class="absolute -top-[5px] -right-[5px] w-2.5 h-2.5 border-t border-r border-crimson"></span>
+          <span class="absolute -bottom-[5px] -left-[5px] w-2.5 h-2.5 border-b border-l border-crimson"></span>
+          <span class="absolute -bottom-[5px] -right-[5px] w-2.5 h-2.5 border-b border-r border-crimson"></span>
+
+          <div class="flex items-center justify-between mb-5">
+            <span class="font-mono text-[10px] tracking-[.22em] uppercase text-paper/70">Spec Sheet</span>
+            <span class="font-mono text-[10px] tracking-[.22em] uppercase text-crimson">OEC-001</span>
+          </div>
+
+          <dl class="divide-y divide-paper/15 text-[13px]">
+            <div class="grid grid-cols-[112px_1fr] gap-3 py-2.5">
+              <dt class="font-mono text-[10px] tracking-[.22em] uppercase text-paper/55">Founded</dt>
+              <dd class="font-display font-[700] text-[18px] tracking-tight uppercase">1974 · John O'Neal</dd>
+            </div>
+            <div class="grid grid-cols-[112px_1fr] gap-3 py-2.5">
+              <dt class="font-mono text-[10px] tracking-[.22em] uppercase text-paper/55">President</dt>
+              <dd class="font-display font-[700] text-[18px] tracking-tight uppercase">Dan Dougherty</dd>
+            </div>
+            <div class="grid grid-cols-[112px_1fr] gap-3 py-2.5">
+              <dt class="font-mono text-[10px] tracking-[.22em] uppercase text-paper/55">HQ</dt>
+              <dd class="text-paper/95">1705 E Summit St · Red Oak, IA 51566</dd>
+            </div>
+            <div class="grid grid-cols-[112px_1fr] gap-3 py-2.5">
+              <dt class="font-mono text-[10px] tracking-[.22em] uppercase text-paper/55">Service</dt>
+              <dd class="text-paper/95">Industrial · Commercial · Residential</dd>
+            </div>
+            <div class="grid grid-cols-[112px_1fr] gap-3 py-2.5">
+              <dt class="font-mono text-[10px] tracking-[.22em] uppercase text-paper/55">Region</dt>
+              <dd class="text-paper/95">Southwest Iowa</dd>
+            </div>
+          </dl>
+
+          <div class="hair-d my-5"></div>
+
+          <a href="tel:+17126233764" class="group flex items-center justify-between gap-3">
+            <div>
+              <div class="font-mono text-[10px] tracking-[.22em] uppercase text-paper/55">Call the shop</div>
+              <div class="font-display font-[800] text-[28px] md:text-[32px] leading-none tracking-tight">(712) 623-3764</div>
+            </div>
+            <span class="btn arr inline-flex items-center justify-center w-11 h-11 bg-crimson text-paper rounded-sm">↗</span>
+          </a>
+        </div>
+      </aside>
+
+      <!-- Sub copy + CTAs -->
+      <div class="col-span-12 lg:col-span-8 mt-10 md:mt-14 grid grid-cols-12 gap-6 md:gap-10 items-end">
+        <p class="col-span-12 md:col-span-7 text-[17px] md:text-[19px] leading-[1.55] text-ink/80 max-w-[52ch] reveal reveal-d3">
+          Fifty years powering southwest Iowa's homes, shops, and factories. A family-run trade with a steady hand — industrial service calls, commercial fit-outs, farm and residential wiring, all held to the same standard we started with in 1974.
+        </p>
+        <div class="col-span-12 md:col-span-5 flex flex-col sm:flex-row gap-3 md:justify-end reveal reveal-d4">
+          <a href="#contact" class="btn inline-flex items-center justify-between gap-3 bg-ink text-paper px-5 h-12 rounded-sm font-mono text-[12px] tracking-[.18em] uppercase hover:bg-crimson">
+            <span>Request a Bid</span><span class="arr">↗</span>
+          </a>
+          <a href="#services" class="btn inline-flex items-center justify-between gap-3 border border-ink/30 text-ink px-5 h-12 rounded-sm font-mono text-[12px] tracking-[.18em] uppercase hover:border-crimson hover:text-crimson">
+            <span>Our Services</span><span class="arr">↘</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- stat band -->
+    <div class="hair mt-16"></div>
+    <div class="grid grid-cols-2 md:grid-cols-4 divide-x divide-ink/10 mt-0 border-b border-ink/10">
+      <div class="p-5 md:p-7 reveal">
+        <div class="font-display font-[900] text-[56px] md:text-[72px] leading-none tracking-tightest">50<span class="text-crimson">+</span></div>
+        <div class="font-mono text-[10px] tracking-[.22em] uppercase text-ink/55 mt-2">Years in trade</div>
+      </div>
+      <div class="p-5 md:p-7 reveal reveal-d1">
+        <div class="font-display font-[900] text-[56px] md:text-[72px] leading-none tracking-tightest">3</div>
+        <div class="font-mono text-[10px] tracking-[.22em] uppercase text-ink/55 mt-2">Sectors · Ind · Com · Res</div>
+      </div>
+      <div class="p-5 md:p-7 reveal reveal-d2">
+        <div class="font-display font-[900] text-[56px] md:text-[72px] leading-none tracking-tightest">24<span class="text-ink/35">/</span>7</div>
+        <div class="font-mono text-[10px] tracking-[.22em] uppercase text-ink/55 mt-2">Emergency dispatch</div>
+      </div>
+      <div class="p-5 md:p-7 reveal reveal-d3">
+        <div class="font-display font-[900] text-[56px] md:text-[72px] leading-none tracking-tightest">IA</div>
+        <div class="font-mono text-[10px] tracking-[.22em] uppercase text-ink/55 mt-2">Licensed contractor</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     MARQUEE TRUST STRIP
+     ========================================================= -->
+<div class="relative bg-ink text-paper py-5 overflow-hidden border-y border-paper/10">
+  <div class="marquee">
+    <div class="marquee-track font-display font-[800] uppercase text-[38px] md:text-[52px] leading-none tracking-tightest whitespace-nowrap">
+      <span>Industrial</span><span class="text-crimson">✺</span>
+      <span>Commercial</span><span class="text-crimson">✺</span>
+      <span>Residential</span><span class="text-crimson">✺</span>
+      <span>Agricultural</span><span class="text-crimson">✺</span>
+      <span class="text-signal">Since 1974</span><span class="text-crimson">✺</span>
+      <span>24 / 7 Service</span><span class="text-crimson">✺</span>
+      <span>Red Oak, Iowa</span><span class="text-crimson">✺</span>
+    </div>
+    <div class="marquee-track font-display font-[800] uppercase text-[38px] md:text-[52px] leading-none tracking-tightest whitespace-nowrap" aria-hidden="true">
+      <span>Industrial</span><span class="text-crimson">✺</span>
+      <span>Commercial</span><span class="text-crimson">✺</span>
+      <span>Residential</span><span class="text-crimson">✺</span>
+      <span>Agricultural</span><span class="text-crimson">✺</span>
+      <span class="text-signal">Since 1974</span><span class="text-crimson">✺</span>
+      <span>24 / 7 Service</span><span class="text-crimson">✺</span>
+      <span>Red Oak, Iowa</span><span class="text-crimson">✺</span>
+    </div>
+  </div>
+</div>
+
+<!-- =========================================================
+     SERVICES
+     ========================================================= -->
+<section id="services" class="relative bg-paper2 border-b border-ink/10">
+  <div class="absolute inset-0 bp-grid opacity-70 pointer-events-none"></div>
+  <div class="relative max-w-[1440px] mx-auto px-5 md:px-10 py-20 md:py-28">
+
+    <div class="grid grid-cols-12 gap-6 md:gap-10 items-end mb-12 md:mb-16">
+      <div class="col-span-12 md:col-span-8 reveal">
+        <div class="flex items-center gap-3 font-mono text-[11px] tracking-[.22em] uppercase text-ink/55 mb-5">
+          <span class="w-6 h-px bg-ink/40"></span>
+          <span>01 / Services</span>
+        </div>
+        <h2 class="font-display font-[900] uppercase leading-[.9] tracking-tightest text-[13vw] sm:text-[10vw] md:text-[7.5vw] lg:text-[104px]">
+          What we <span class="text-crimson">wire</span>.
+        </h2>
+      </div>
+      <p class="col-span-12 md:col-span-4 text-[15px] md:text-[16px] leading-[1.65] text-ink/75 reveal reveal-d1">
+        Four decades of hands on the grid. From service calls on a Sunday night to
+        hundred-thousand-square-foot facility builds — the same crew, the same code,
+        the same promise.
+      </p>
+    </div>
+
+    <!-- Service cards -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-0 border border-ink/15 bg-paper rounded-sm overflow-hidden">
+
+      <!-- 01 -->
+      <article class="service group relative p-7 md:p-9 bg-paper border-r border-b md:border-b-0 border-ink/10 reveal">
+        <div class="flex items-start justify-between">
+          <span class="num font-display font-[900] text-[88px] md:text-[96px] leading-none tracking-tightest text-ink/85">01</span>
+          <span class="arrow font-mono text-ink/55 group-hover:text-crimson">↗</span>
+        </div>
+        <div class="bar my-6"></div>
+        <h3 class="font-display font-[800] uppercase text-[28px] md:text-[30px] tracking-tight leading-none">Industrial</h3>
+        <p class="mt-3 text-[14.5px] leading-[1.65] text-ink/70">
+          Plant wiring, motor control, PLC hookups, conveyor &amp; machine integration, high-bay lighting retrofits, and preventative maintenance contracts.
+        </p>
+        <ul class="mt-5 space-y-1.5 font-mono text-[11px] tracking-[.12em] uppercase text-ink/55">
+          <li>— Motor Controls &amp; VFDs</li>
+          <li>— PLC &amp; Automation</li>
+          <li>— Power Distribution</li>
+        </ul>
+      </article>
+
+      <!-- 02 -->
+      <article class="service group relative p-7 md:p-9 bg-paper border-b lg:border-b-0 lg:border-r border-ink/10 reveal reveal-d1">
+        <div class="flex items-start justify-between">
+          <span class="num font-display font-[900] text-[88px] md:text-[96px] leading-none tracking-tightest text-ink/85">02</span>
+          <span class="arrow font-mono text-ink/55 group-hover:text-crimson">↗</span>
+        </div>
+        <div class="bar my-6"></div>
+        <h3 class="font-display font-[800] uppercase text-[28px] md:text-[30px] tracking-tight leading-none">Commercial</h3>
+        <p class="mt-3 text-[14.5px] leading-[1.65] text-ink/70">
+          Tenant fit-outs, office and retail builds, restaurants, clinics, municipal and school work — turn-key from rough-in to final inspection.
+        </p>
+        <ul class="mt-5 space-y-1.5 font-mono text-[11px] tracking-[.12em] uppercase text-ink/55">
+          <li>— Design-Build Projects</li>
+          <li>— Tenant Improvements</li>
+          <li>— Lighting &amp; Controls</li>
+        </ul>
+      </article>
+
+      <!-- 03 -->
+      <article class="service group relative p-7 md:p-9 bg-paper border-r md:border-b lg:border-b-0 border-ink/10 reveal reveal-d2">
+        <div class="flex items-start justify-between">
+          <span class="num font-display font-[900] text-[88px] md:text-[96px] leading-none tracking-tightest text-ink/85">03</span>
+          <span class="arrow font-mono text-ink/55 group-hover:text-crimson">↗</span>
+        </div>
+        <div class="bar my-6"></div>
+        <h3 class="font-display font-[800] uppercase text-[28px] md:text-[30px] tracking-tight leading-none">Residential</h3>
+        <p class="mt-3 text-[14.5px] leading-[1.65] text-ink/70">
+          Whole-home rewires, new construction, panel upgrades, generator installs, EV chargers, and the small fixes that don't feel small when it's your kitchen.
+        </p>
+        <ul class="mt-5 space-y-1.5 font-mono text-[11px] tracking-[.12em] uppercase text-ink/55">
+          <li>— Service Upgrades</li>
+          <li>— Generators &amp; EV</li>
+          <li>— Remodels &amp; New Build</li>
+        </ul>
+      </article>
+
+      <!-- 04 -->
+      <article class="service group relative p-7 md:p-9 bg-paper reveal reveal-d3">
+        <div class="flex items-start justify-between">
+          <span class="num font-display font-[900] text-[88px] md:text-[96px] leading-none tracking-tightest text-ink/85">04</span>
+          <span class="arrow font-mono text-ink/55 group-hover:text-crimson">↗</span>
+        </div>
+        <div class="bar my-6"></div>
+        <h3 class="font-display font-[800] uppercase text-[28px] md:text-[30px] tracking-tight leading-none">24/7 Service</h3>
+        <p class="mt-3 text-[14.5px] leading-[1.65] text-ink/70">
+          Power down on a holiday? A smoking panel at 2 a.m.? Dispatched crew, real phones, and a truck on the road — every day of the year.
+        </p>
+        <ul class="mt-5 space-y-1.5 font-mono text-[11px] tracking-[.12em] uppercase text-ink/55">
+          <li>— Emergency Dispatch</li>
+          <li>— Storm &amp; Surge Repair</li>
+          <li>— Preventative Maint.</li>
+        </ul>
+      </article>
+
+    </div>
+
+    <!-- certifications strip -->
+    <div class="mt-14 md:mt-20 grid grid-cols-2 md:grid-cols-4 gap-0 border-t border-ink/15">
+      <div class="p-5 md:p-7 border-r border-ink/15">
+        <div class="font-mono text-[10px] tracking-[.22em] uppercase text-ink/55">Licensed</div>
+        <div class="font-display font-[800] text-[22px] mt-1 uppercase tracking-tight">State of Iowa</div>
+      </div>
+      <div class="p-5 md:p-7 md:border-r border-ink/15">
+        <div class="font-mono text-[10px] tracking-[.22em] uppercase text-ink/55">Insured</div>
+        <div class="font-display font-[800] text-[22px] mt-1 uppercase tracking-tight">Fully Bonded</div>
+      </div>
+      <div class="p-5 md:p-7 border-t md:border-t-0 border-r border-ink/15">
+        <div class="font-mono text-[10px] tracking-[.22em] uppercase text-ink/55">Code</div>
+        <div class="font-display font-[800] text-[22px] mt-1 uppercase tracking-tight">NEC Compliant</div>
+      </div>
+      <div class="p-5 md:p-7 border-t md:border-t-0 border-ink/15">
+        <div class="font-mono text-[10px] tracking-[.22em] uppercase text-ink/55">Union</div>
+        <div class="font-display font-[800] text-[22px] mt-1 uppercase tracking-tight">Safety-First Crew</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- =========================================================
+     WORK / PROJECTS
+     ========================================================= -->
+<section id="work" class="relative bg-ink text-paper overflow-hidden border-b border-paper/10">
+  <div class="absolute inset-0 bp-grid-dark opacity-80 pointer-events-none"></div>
+
+  <div class="relative max-w-[1440px] mx-auto px-5 md:px-10 py-20 md:py-28">
+    <div class="flex flex-wrap items-end justify-between gap-6 mb-12 md:mb-16">
+      <div class="reveal">
+        <div class="flex items-center gap-3 font-mono text-[11px] tracking-[.22em] uppercase text-paper/55 mb-5">
+          <span class="w-6 h-px bg-paper/40"></span>
+          <span>02 / Projects</span>
+          <span class="text-crimson">●</span>
+          <span>Selected Work</span>
+        </div>
+        <h2 class="font-display font-[900] uppercase leading-[.9] tracking-tightest text-[13vw] sm:text-[10vw] md:text-[7.5vw] lg:text-[104px]">
+          Fifty years<br/>on the line.
+        </h2>
+      </div>
+      <a href="#contact" class="btn hidden md:inline-flex items-center gap-3 border border-paper/30 text-paper px-5 h-12 rounded-sm font-mono text-[12px] tracking-[.18em] uppercase hover:border-crimson hover:text-crimson reveal reveal-d1">
+        Start a Project <span class="arr">↗</span>
+      </a>
+    </div>
+
+    <!-- Asymmetric image grid -->
+    <div class="grid grid-cols-12 gap-3 md:gap-5">
+      <!-- Hero project -->
+      <figure class="tile col-span-12 lg:col-span-8 aspect-[16/10] rounded-sm overflow-hidden reveal">
+        <img src="https://picsum.photos/seed/oec-plant-01/1600/1000?grayscale&blur=1" alt="Industrial plant wiring" class="w-full h-full object-cover" />
+        <div class="tile-tint"></div>
+        <div class="tile-wash"></div>
+        <figcaption class="absolute inset-0 p-5 md:p-8 flex flex-col justify-between">
+          <div class="flex items-center gap-3 font-mono text-[10px] tracking-[.24em] uppercase text-paper/80">
+            <span class="text-crimson">◢</span> Project № 001 · Industrial
+          </div>
+          <div>
+            <div class="font-mono text-[10px] tracking-[.22em] uppercase text-paper/60">Manufacturing · Montgomery Co. IA</div>
+            <h3 class="font-display font-[800] uppercase tracking-tight text-[32px] md:text-[44px] leading-[.95] mt-1">Plant-wide Power Distribution</h3>
+            <div class="mt-3 flex flex-wrap gap-2 font-mono text-[10px] tracking-[.16em] uppercase">
+              <span class="px-2 py-1 border border-paper/30 rounded-sm">480V · 3Ø</span>
+              <span class="px-2 py-1 border border-paper/30 rounded-sm">Motor Control</span>
+              <span class="px-2 py-1 border border-paper/30 rounded-sm">High-bay LED</span>
+            </div>
+          </div>
+        </figcaption>
+      </figure>
+
+      <!-- Side column -->
+      <div class="col-span-12 lg:col-span-4 grid grid-cols-2 lg:grid-cols-1 gap-3 md:gap-5">
+        <figure class="tile aspect-square lg:aspect-[4/3] rounded-sm overflow-hidden reveal reveal-d1">
+          <img src="https://picsum.photos/seed/oec-commercial-02/900/700?grayscale&blur=1" alt="Commercial fit-out" class="w-full h-full object-cover" />
+          <div class="tile-tint"></div>
+          <div class="tile-wash"></div>
+          <figcaption class="absolute inset-0 p-4 md:p-6 flex flex-col justify-between">
+            <span class="font-mono text-[10px] tracking-[.24em] uppercase text-paper/80"><span class="text-crimson">◢</span> № 002 · Commercial</span>
+            <div>
+              <div class="font-mono text-[10px] tracking-[.22em] uppercase text-paper/60">Main St. Retail · Red Oak</div>
+              <h3 class="font-display font-[800] uppercase tracking-tight text-[22px] md:text-[26px] leading-[.95] mt-1">Storefront Fit-Out</h3>
+            </div>
+          </figcaption>
+        </figure>
+        <figure class="tile aspect-square lg:aspect-[4/3] rounded-sm overflow-hidden reveal reveal-d2">
+          <img src="https://picsum.photos/seed/oec-residential-03/900/700?grayscale&blur=1" alt="Residential service upgrade" class="w-full h-full object-cover" />
+          <div class="tile-tint"></div>
+          <div class="tile-wash"></div>
+          <figcaption class="absolute inset-0 p-4 md:p-6 flex flex-col justify-between">
+            <span class="font-mono text-[10px] tracking-[.24em] uppercase text-paper/80"><span class="text-crimson">◢</span> № 003 · Residential</span>
+            <div>
+              <div class="font-mono text-[10px] tracking-[.22em] uppercase text-paper/60">200A Service · Farmhouse</div>
+              <h3 class="font-display font-[800] uppercase tracking-tight text-[22px] md:text-[26px] leading-[.95] mt-1">Panel &amp; Generator</h3>
+            </div>
+          </figcaption>
+        </figure>
+      </div>
+
+      <!-- Bottom row -->
+      <figure class="tile col-span-6 lg:col-span-4 aspect-[4/3] rounded-sm overflow-hidden reveal">
+        <img src="https://picsum.photos/seed/oec-agricultural-04/900/700?grayscale&blur=1" alt="Agricultural electrical" class="w-full h-full object-cover" />
+        <div class="tile-tint"></div>
+        <div class="tile-wash"></div>
+        <figcaption class="absolute inset-0 p-4 md:p-6 flex flex-col justify-between">
+          <span class="font-mono text-[10px] tracking-[.24em] uppercase text-paper/80"><span class="text-crimson">◢</span> № 004 · Agricultural</span>
+          <div>
+            <div class="font-mono text-[10px] tracking-[.22em] uppercase text-paper/60">Grain Bin Motor Ctrl</div>
+            <h3 class="font-display font-[800] uppercase tracking-tight text-[22px] md:text-[26px] leading-[.95] mt-1">Co-op Facility</h3>
+          </div>
+        </figcaption>
+      </figure>
+      <figure class="tile col-span-6 lg:col-span-4 aspect-[4/3] rounded-sm overflow-hidden reveal reveal-d1">
+        <img src="https://picsum.photos/seed/oec-municipal-05/900/700?grayscale&blur=1" alt="Municipal lighting" class="w-full h-full object-cover" />
+        <div class="tile-tint"></div>
+        <div class="tile-wash"></div>
+        <figcaption class="absolute inset-0 p-4 md:p-6 flex flex-col justify-between">
+          <span class="font-mono text-[10px] tracking-[.24em] uppercase text-paper/80"><span class="text-crimson">◢</span> № 005 · Municipal</span>
+          <div>
+            <div class="font-mono text-[10px] tracking-[.22em] uppercase text-paper/60">Street &amp; Park Lighting</div>
+            <h3 class="font-display font-[800] uppercase tracking-tight text-[22px] md:text-[26px] leading-[.95] mt-1">City Modernization</h3>
+          </div>
+        </figcaption>
+      </figure>
+      <figure class="tile col-span-12 lg:col-span-4 aspect-[16/9] lg:aspect-[4/3] rounded-sm overflow-hidden reveal reveal-d2">
+        <img src="https://picsum.photos/seed/oec-clinic-06/900/700?grayscale&blur=1" alt="Clinic wiring" class="w-full h-full object-cover" />
+        <div class="tile-tint"></div>
+        <div class="tile-wash"></div>
+        <figcaption class="absolute inset-0 p-4 md:p-6 flex flex-col justify-between">
+          <span class="font-mono text-[10px] tracking-[.24em] uppercase text-paper/80"><span class="text-crimson">◢</span> № 006 · Healthcare</span>
+          <div>
+            <div class="font-mono text-[10px] tracking-[.22em] uppercase text-paper/60">Clinic Build-Out</div>
+            <h3 class="font-display font-[800] uppercase tracking-tight text-[22px] md:text-[26px] leading-[.95] mt-1">Rural Health Addition</h3>
+          </div>
+        </figcaption>
+      </figure>
+    </div>
+
+    <p class="mt-10 font-mono text-[11px] tracking-[.2em] uppercase text-paper/50 reveal">
+      A small sample. <span class="text-paper/80">Ask about your sector — we've wired it.</span>
+    </p>
+  </div>
+</section>
+
+<!-- =========================================================
+     ABOUT / HISTORY
+     ========================================================= -->
+<section id="about" class="relative bg-paper border-b border-ink/10 overflow-hidden">
+  <div class="absolute inset-0 bp-grid opacity-60 pointer-events-none"></div>
+  <div class="relative max-w-[1440px] mx-auto px-5 md:px-10 py-20 md:py-28">
+
+    <div class="grid grid-cols-12 gap-6 md:gap-10">
+
+      <!-- Left editorial -->
+      <div class="col-span-12 lg:col-span-7">
+        <div class="flex items-center gap-3 font-mono text-[11px] tracking-[.22em] uppercase text-ink/55 mb-5 reveal">
+          <span class="w-6 h-px bg-ink/40"></span>
+          <span>03 / About</span>
+          <span class="text-crimson">●</span>
+          <span>A Red Oak family trade</span>
+        </div>
+        <h2 class="font-display font-[900] uppercase leading-[.88] tracking-tightest text-[13vw] sm:text-[10vw] md:text-[7.5vw] lg:text-[108px] reveal">
+          Fifty years<br/>one standard.
+        </h2>
+
+        <!-- Pull quote -->
+        <blockquote class="mt-10 md:mt-14 max-w-[52ch] reveal reveal-d1">
+          <span class="font-serif italic text-[34px] md:text-[48px] leading-[1.1] text-ink/85 block">
+            &ldquo;We've been doing this since nineteen seventy-four — the work hasn't changed, just the lights we put it under.&rdquo;
+          </span>
+          <footer class="mt-4 font-mono text-[11px] tracking-[.22em] uppercase text-ink/55">— Dan Dougherty, President</footer>
+        </blockquote>
+
+        <!-- Prose -->
+        <div class="mt-10 md:mt-14 grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 text-[15px] md:text-[16px] leading-[1.75] text-ink/80">
+          <p class="reveal reveal-d2">
+            O'Neal Electric Company was founded in 1974 by John O'Neal in Red Oak, Iowa. Across thirty-seven years, John built an electrically versatile company engaging every corner of the trade across southwest Iowa — industrial floors, Main Street storefronts, farmhouses, and county jobs.
+          </p>
+          <p class="reveal reveal-d3">
+            In 2009, John retired and handed the keys to current president Dan Dougherty. The shop hasn't changed: the same values, the same crew-first attitude, the same promise to show up and do it right. Nearly fifty years in, we're still doing what we do.
+          </p>
+        </div>
+
+        <!-- Values row -->
+        <div class="mt-12 md:mt-16 grid grid-cols-3 border-t border-ink/15">
+          <div class="p-5 md:p-7 border-r border-ink/15 reveal">
+            <div class="font-mono text-[10px] tracking-[.22em] uppercase text-ink/55">Craft</div>
+            <div class="font-display font-[800] text-[22px] md:text-[26px] mt-1 uppercase tracking-tight">Built right<br/>the first time.</div>
+          </div>
+          <div class="p-5 md:p-7 border-r border-ink/15 reveal reveal-d1">
+            <div class="font-mono text-[10px] tracking-[.22em] uppercase text-ink/55">Word</div>
+            <div class="font-display font-[800] text-[22px] md:text-[26px] mt-1 uppercase tracking-tight">Show up<br/>when we say.</div>
+          </div>
+          <div class="p-5 md:p-7 reveal reveal-d2">
+            <div class="font-mono text-[10px] tracking-[.22em] uppercase text-ink/55">Place</div>
+            <div class="font-display font-[800] text-[22px] md:text-[26px] mt-1 uppercase tracking-tight">Iowa<br/>neighbors first.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right — timeline + image -->
+      <aside class="col-span-12 lg:col-span-5 lg:pl-6 lg:border-l border-ink/15">
+        <figure class="tile aspect-[4/5] rounded-sm overflow-hidden reveal">
+          <img src="https://picsum.photos/seed/oec-crew-01/900/1200?grayscale&blur=1" alt="Crew portrait" class="w-full h-full object-cover" />
+          <div class="absolute inset-0" style="background: linear-gradient(180deg, transparent 35%, rgba(7,7,48,.55) 100%); mix-blend-mode:multiply;"></div>
+          <figcaption class="absolute left-5 right-5 bottom-5 flex items-end justify-between">
+            <div>
+              <div class="font-mono text-[10px] tracking-[.22em] uppercase text-paper/80">The crew</div>
+              <div class="font-display font-[800] uppercase tracking-tight text-[26px] leading-none text-paper mt-1">Red Oak, IA</div>
+            </div>
+            <div class="font-mono text-[10px] tracking-[.22em] uppercase text-paper/70">
+              1705 E Summit St.
+            </div>
+          </figcaption>
+        </figure>
+
+        <!-- Timeline -->
+        <ol class="mt-10 space-y-5 border-l border-ink/15 pl-6 relative">
+          <li class="relative reveal">
+            <span class="absolute -left-[29px] top-1 w-2.5 h-2.5 bg-crimson rounded-full ring-4 ring-paper"></span>
+            <div class="font-mono text-[10px] tracking-[.22em] uppercase text-ink/55">1974</div>
+            <div class="font-display font-[700] text-[20px] uppercase tracking-tight">John O'Neal founds OEC.</div>
+          </li>
+          <li class="relative reveal reveal-d1">
+            <span class="absolute -left-[29px] top-1 w-2.5 h-2.5 bg-ink rounded-full ring-4 ring-paper"></span>
+            <div class="font-mono text-[10px] tracking-[.22em] uppercase text-ink/55">1980s</div>
+            <div class="font-display font-[700] text-[20px] uppercase tracking-tight">Industrial service grows.</div>
+          </li>
+          <li class="relative reveal reveal-d2">
+            <span class="absolute -left-[29px] top-1 w-2.5 h-2.5 bg-ink rounded-full ring-4 ring-paper"></span>
+            <div class="font-mono text-[10px] tracking-[.22em] uppercase text-ink/55">2009</div>
+            <div class="font-display font-[700] text-[20px] uppercase tracking-tight">Dan Dougherty, President.</div>
+          </li>
+          <li class="relative reveal reveal-d3">
+            <span class="absolute -left-[29px] top-1 w-2.5 h-2.5 bg-signal rounded-full ring-4 ring-paper"></span>
+            <div class="font-mono text-[10px] tracking-[.22em] uppercase text-ink/55">Today</div>
+            <div class="font-display font-[700] text-[20px] uppercase tracking-tight">Still on the line.</div>
+          </li>
+        </ol>
+      </aside>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- =========================================================
+     CONTACT
+     ========================================================= -->
+<section id="contact" class="relative bg-paper2 border-b border-ink/10 overflow-hidden">
+  <div class="absolute inset-0 bp-grid opacity-70 pointer-events-none"></div>
+
+  <div class="relative max-w-[1440px] mx-auto px-5 md:px-10 py-20 md:py-28">
+    <div class="flex items-center gap-3 font-mono text-[11px] tracking-[.22em] uppercase text-ink/55 mb-6 reveal">
+      <span class="w-6 h-px bg-ink/40"></span>
+      <span>04 / Contact</span>
+      <span class="text-crimson">●</span>
+      <span>Request a Bid · Schedule Service · Say Hello</span>
+    </div>
+
+    <h2 class="font-display font-[900] uppercase leading-[.88] tracking-tightest text-[14vw] sm:text-[11vw] md:text-[9vw] lg:text-[140px] reveal">
+      Get a <span class="text-crimson">bid</span>.
+    </h2>
+
+    <div class="grid grid-cols-12 gap-6 md:gap-10 mt-10 md:mt-14">
+
+      <!-- FORM -->
+      <form class="col-span-12 lg:col-span-7 bg-paper border border-ink/15 p-6 md:p-10 rounded-sm reveal" onsubmit="event.preventDefault(); this.querySelector('.submitted').style.display='flex'; this.querySelector('.submit-cta').style.display='none';">
+        <div class="flex items-center justify-between mb-6 md:mb-8">
+          <span class="font-mono text-[10px] tracking-[.22em] uppercase text-ink/55">Form · 04.1</span>
+          <span class="font-mono text-[10px] tracking-[.22em] uppercase text-crimson">Reply · 1 business day</span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+          <label class="block">
+            <span class="font-mono text-[10px] tracking-[.22em] uppercase text-ink/55">Name</span>
+            <input class="field mt-1" type="text" required placeholder="Jane Farmer" />
+          </label>
+          <label class="block">
+            <span class="font-mono text-[10px] tracking-[.22em] uppercase text-ink/55">Phone</span>
+            <input class="field mt-1" type="tel" placeholder="(712) 000-0000" />
+          </label>
+          <label class="block">
+            <span class="font-mono text-[10px] tracking-[.22em] uppercase text-ink/55">Email</span>
+            <input class="field mt-1" type="email" required placeholder="jane@farmstead.com" />
+          </label>
+          <label class="block">
+            <span class="font-mono text-[10px] tracking-[.22em] uppercase text-ink/55">Project Type</span>
+            <select class="field mt-1" required>
+              <option>Industrial</option>
+              <option>Commercial</option>
+              <option>Residential</option>
+              <option>Agricultural</option>
+              <option>Emergency Service</option>
+              <option>Other</option>
+            </select>
+          </label>
+          <label class="block md:col-span-2">
+            <span class="font-mono text-[10px] tracking-[.22em] uppercase text-ink/55">Tell us about the job</span>
+            <textarea class="field mt-1" rows="4" placeholder="Scope, timing, location..."></textarea>
+          </label>
+        </div>
+
+        <div class="hair my-8"></div>
+
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+          <p class="font-mono text-[11px] tracking-[.16em] uppercase text-ink/55 max-w-[34ch]">
+            Or call the shop — a person answers. <span class="text-crimson">(712) 623-3764</span>
+          </p>
+          <button class="submit-cta btn inline-flex items-center justify-between gap-3 bg-ink text-paper px-6 h-12 rounded-sm font-mono text-[12px] tracking-[.18em] uppercase hover:bg-crimson">
+            <span>Send Request</span><span class="arr">↗</span>
+          </button>
+          <span class="submitted items-center gap-3 bg-ink text-signal px-6 h-12 rounded-sm font-mono text-[12px] tracking-[.18em] uppercase" style="display:none;">
+            <span class="text-crimson">●</span> Received · we'll be in touch.
+          </span>
+        </div>
+      </form>
+
+      <!-- CONTACT PANEL -->
+      <aside class="col-span-12 lg:col-span-5 reveal reveal-d1">
+        <div class="bg-ink text-paper p-6 md:p-9 rounded-sm relative shadow-[0_30px_70px_-30px_rgba(7,7,48,.55)]">
+          <span class="absolute -top-[5px] -left-[5px] w-2.5 h-2.5 border-t border-l border-crimson"></span>
+          <span class="absolute -top-[5px] -right-[5px] w-2.5 h-2.5 border-t border-r border-crimson"></span>
+          <span class="absolute -bottom-[5px] -left-[5px] w-2.5 h-2.5 border-b border-l border-crimson"></span>
+          <span class="absolute -bottom-[5px] -right-[5px] w-2.5 h-2.5 border-b border-r border-crimson"></span>
+
+          <div class="flex items-center justify-between mb-6">
+            <span class="font-mono text-[10px] tracking-[.22em] uppercase text-paper/70">The Shop</span>
+            <span class="font-mono text-[10px] tracking-[.22em] uppercase text-signal">Open · Mon&ndash;Fri</span>
+          </div>
+
+          <a href="tel:+17126233764" class="block group">
+            <div class="font-mono text-[10px] tracking-[.22em] uppercase text-paper/55">Dispatch</div>
+            <div class="font-display font-[900] leading-none tracking-tightest text-[54px] md:text-[72px] mt-1">(712)<br/>623-3764</div>
+          </a>
+
+          <div class="hair-d my-6"></div>
+
+          <address class="not-italic grid grid-cols-1 gap-5 text-[14px] leading-[1.6]">
+            <div>
+              <div class="font-mono text-[10px] tracking-[.22em] uppercase text-paper/55 mb-1">Address</div>
+              <div class="font-display font-[700] text-[20px] uppercase tracking-tight leading-tight">1705 E Summit Street<br/>Red Oak, IA 51566</div>
+            </div>
+            <div>
+              <div class="font-mono text-[10px] tracking-[.22em] uppercase text-paper/55 mb-1">Hours</div>
+              <div>Mon&ndash;Fri · 7:00 am &ndash; 4:30 pm CT</div>
+              <div>24/7 Emergency Dispatch</div>
+            </div>
+            <div>
+              <div class="font-mono text-[10px] tracking-[.22em] uppercase text-paper/55 mb-1">Service Area</div>
+              <div>Red Oak · Atlantic · Creston · Shenandoah · Clarinda · and southwest Iowa at large</div>
+            </div>
+          </address>
+
+          <div class="hair-d my-6"></div>
+
+          <a href="https://maps.google.com/?q=1705+E+Summit+St+Red+Oak+IA+51566" target="_blank" rel="noreferrer" class="btn inline-flex items-center gap-3 bg-paper text-ink px-5 h-11 rounded-sm font-mono text-[11px] tracking-[.18em] uppercase hover:bg-crimson hover:text-paper">
+            Get Directions <span class="arr">↗</span>
+          </a>
+        </div>
+      </aside>
+
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     FOOTER
+     ========================================================= -->
+<footer class="relative bg-ink text-paper overflow-hidden">
+  <div class="absolute inset-0 bp-grid-dark opacity-60 pointer-events-none"></div>
+
+  <div class="relative max-w-[1440px] mx-auto px-5 md:px-10 pt-16 md:pt-24 pb-10">
+
+    <!-- Massive wordmark -->
+    <div class="border-t border-paper/15 pt-10 md:pt-14">
+      <div class="flex items-start justify-between gap-8 flex-wrap">
+        <div>
+          <div class="font-mono text-[10px] tracking-[.22em] uppercase text-paper/55 mb-3">— Est. 1974 · Red Oak, Iowa</div>
+          <div class="font-display font-[900] uppercase leading-[.86] tracking-tightest text-[18vw] sm:text-[14vw] md:text-[10vw] lg:text-[160px]">
+            O'Neal<br/>Electric<span class="text-crimson">.</span>
+          </div>
+        </div>
+        <div class="max-w-[260px] font-serif italic text-[20px] md:text-[22px] text-paper/80 leading-[1.35] pt-2">
+          &ldquo;Quality our specialty — same as it was in nineteen seventy-four.&rdquo;
+        </div>
+      </div>
+    </div>
+
+    <div class="hair-d mt-12"></div>
+
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-10 py-10">
+      <div>
+        <div class="font-mono text-[10px] tracking-[.22em] uppercase text-paper/55 mb-3">Navigate</div>
+        <ul class="space-y-1.5 text-[14px]">
+          <li><a href="#services" class="navlink">Services</a></li>
+          <li><a href="#work" class="navlink">Projects</a></li>
+          <li><a href="#about" class="navlink">About</a></li>
+          <li><a href="#contact" class="navlink">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="font-mono text-[10px] tracking-[.22em] uppercase text-paper/55 mb-3">Services</div>
+        <ul class="space-y-1.5 text-[14px]">
+          <li>Industrial</li>
+          <li>Commercial</li>
+          <li>Residential</li>
+          <li>24 / 7 Service</li>
+        </ul>
+      </div>
+      <div>
+        <div class="font-mono text-[10px] tracking-[.22em] uppercase text-paper/55 mb-3">Shop</div>
+        <ul class="space-y-1.5 text-[14px]">
+          <li>1705 E Summit Street</li>
+          <li>Red Oak, IA 51566</li>
+          <li><a href="tel:+17126233764" class="navlink">(712) 623-3764</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="font-mono text-[10px] tracking-[.22em] uppercase text-paper/55 mb-3">Credentials</div>
+        <ul class="space-y-1.5 text-[14px]">
+          <li>Licensed · Iowa</li>
+          <li>Fully Bonded</li>
+          <li>NEC Compliant</li>
+          <li>24 / 7 Dispatch</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="hair-d"></div>
+
+    <div class="flex flex-wrap items-center justify-between gap-4 pt-6 font-mono text-[11px] tracking-[.18em] uppercase text-paper/55">
+      <div>© <span id="yr"></span> O'Neal Electric Company, Inc. ® — All rights reserved.</div>
+      <div class="flex items-center gap-5">
+        <span class="text-paper/80">QUALITY · OUR SPECIALTY · SINCE 1974</span>
+        <span class="text-crimson">●</span>
+        <span>Made in Iowa</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // year
+  document.getElementById('yr').textContent = new Date().getFullYear();
+
+  // scroll reveals
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
