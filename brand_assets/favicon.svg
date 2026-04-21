@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="O'Neal Electric">
+  <rect width="32" height="32" rx="3" ry="3" fill="#070730"/>
+  <path d="M19 4.5 L7.5 17.5 h6.2 l-2 10 L24.5 13 h-6.2 z" fill="#F5C518" stroke="#F5C518" stroke-linejoin="round" stroke-width="0.6"/>
+  <circle cx="26.2" cy="5.8" r="2.6" fill="#B91806"/>
+</svg>
