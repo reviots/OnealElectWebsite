@@ -1,6 +1,9 @@
 node_modules/
 temporary screenshots/
 .vercel/
+.env
+.env.local
+.env.*.local
 .DS_Store
 Thumbs.db
 *.log

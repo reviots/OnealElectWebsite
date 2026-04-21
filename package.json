@@ -1,24 +1,27 @@
 {
   "name": "onealelectwebsite",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "private": true,
+  "description": "O'Neal Electric Company — marketing website",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "node serve.mjs",
+    "screenshot": "node screenshot.mjs",
+    "favicon": "node tools/make-favicon.mjs"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/reviots/OnealElectWebsite.git"
   },
-  "keywords": [],
-  "author": "",
   "license": "ISC",
-  "type": "commonjs",
   "bugs": {
     "url": "https://github.com/reviots/OnealElectWebsite/issues"
   },
   "homepage": "https://github.com/reviots/OnealElectWebsite#readme",
   "dependencies": {
+    "nodemailer": "^8.0.5"
+  },
+  "devDependencies": {
     "puppeteer": "^24.42.0"
   }
 }

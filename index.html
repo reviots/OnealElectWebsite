@@ -766,7 +766,7 @@
     <div class="grid grid-cols-12 gap-6 md:gap-10 mt-10 md:mt-14">
 
       <!-- FORM -->
-      <form class="col-span-12 lg:col-span-7 bg-paper border border-ink/15 p-6 md:p-10 rounded-sm reveal" onsubmit="event.preventDefault(); this.querySelector('.submitted').style.display='flex'; this.querySelector('.submit-cta').style.display='none';">
+      <form id="bid-form" class="col-span-12 lg:col-span-7 bg-paper border border-ink/15 p-6 md:p-10 rounded-sm reveal" novalidate>
         <div class="flex items-center justify-between mb-6 md:mb-8">
           <span class="font-mono text-[10px] tracking-[.22em] uppercase text-ink/55">Form · 04.1</span>
           <span class="font-mono text-[10px] tracking-[.22em] uppercase text-crimson">Reply · 1 business day</span>
@@ -775,19 +775,19 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
           <label class="block">
             <span class="font-mono text-[10px] tracking-[.22em] uppercase text-ink/55">Name</span>
-            <input class="field mt-1" type="text" required placeholder="Jane Farmer" />
+            <input class="field mt-1" name="name" type="text" required autocomplete="name" maxlength="120" placeholder="Jane Farmer" />
           </label>
           <label class="block">
             <span class="font-mono text-[10px] tracking-[.22em] uppercase text-ink/55">Phone</span>
-            <input class="field mt-1" type="tel" placeholder="(712) 000-0000" />
+            <input class="field mt-1" name="phone" type="tel" autocomplete="tel" maxlength="40" placeholder="(712) 000-0000" />
           </label>
           <label class="block">
             <span class="font-mono text-[10px] tracking-[.22em] uppercase text-ink/55">Email</span>
-            <input class="field mt-1" type="email" required placeholder="jane@farmstead.com" />
+            <input class="field mt-1" name="email" type="email" required autocomplete="email" maxlength="200" placeholder="jane@farmstead.com" />
           </label>
           <label class="block">
             <span class="font-mono text-[10px] tracking-[.22em] uppercase text-ink/55">Project Type</span>
-            <select class="field mt-1" required>
+            <select class="field mt-1" name="projectType" required>
               <option>Industrial</option>
               <option>Commercial</option>
               <option>Residential</option>
@@ -798,23 +798,40 @@
           </label>
           <label class="block md:col-span-2">
             <span class="font-mono text-[10px] tracking-[.22em] uppercase text-ink/55">Tell us about the job</span>
-            <textarea class="field mt-1" rows="4" placeholder="Scope, timing, location..."></textarea>
+            <textarea class="field mt-1" name="message" rows="4" maxlength="5000" placeholder="Scope, timing, location..."></textarea>
           </label>
+
+          <!-- honeypot — real users never fill this; kept off-screen + aria-hidden -->
+          <div aria-hidden="true" style="position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden" tabindex="-1">
+            <label>Website (leave blank)
+              <input type="text" name="website" tabindex="-1" autocomplete="off" />
+            </label>
+          </div>
         </div>
 
         <div class="hair my-8"></div>
 
         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <p class="font-mono text-[11px] tracking-[.16em] uppercase text-ink/55 max-w-[34ch]">
-            Or call the shop — a person answers. <span class="text-crimson">(712) 623-3764</span>
+            Or call the shop — a person answers. <a href="tel:+17126233764" class="text-crimson">(712) 623-3764</a>
           </p>
-          <button class="submit-cta btn inline-flex items-center justify-between gap-3 bg-ink text-paper px-6 h-12 rounded-sm font-mono text-[12px] tracking-[.18em] uppercase hover:bg-crimson">
-            <span>Send Request</span><span class="arr">↗</span>
+
+          <button type="submit" data-state="submit-cta" class="btn inline-flex items-center justify-between gap-3 bg-ink text-paper px-6 h-12 rounded-sm font-mono text-[12px] tracking-[.18em] uppercase hover:bg-crimson disabled:opacity-60 disabled:cursor-wait">
+            <span data-label="idle">Send Request</span>
+            <span data-label="busy" class="hidden">Sending…</span>
+            <span class="arr">↗</span>
           </button>
-          <span class="submitted items-center gap-3 bg-ink text-signal px-6 h-12 rounded-sm font-mono text-[12px] tracking-[.18em] uppercase" style="display:none;">
+
+          <span data-state="submitted" class="items-center gap-3 bg-ink text-signal px-6 h-12 rounded-sm font-mono text-[12px] tracking-[.18em] uppercase" style="display:none;">
             <span class="text-crimson">●</span> Received · we'll be in touch.
           </span>
+
+          <span data-state="errored" class="items-center gap-3 bg-crimson text-paper px-6 h-12 rounded-sm font-mono text-[12px] tracking-[.18em] uppercase" style="display:none;">
+            <span>● Something went wrong — please call us.</span>
+          </span>
         </div>
+
+        <p data-state="error-detail" class="mt-4 font-mono text-[11px] tracking-[.14em] uppercase text-crimson/80 hidden"></p>
       </form>
 
       <!-- CONTACT PANEL -->
@@ -950,6 +967,82 @@
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
   }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // bid form submit → POST /api/contact
+  (() => {
+    const form = document.getElementById('bid-form');
+    if (!form) return;
+    const btn      = form.querySelector('[data-state="submit-cta"]');
+    const idleLbl  = form.querySelector('[data-label="idle"]');
+    const busyLbl  = form.querySelector('[data-label="busy"]');
+    const okMsg    = form.querySelector('[data-state="submitted"]');
+    const errMsg   = form.querySelector('[data-state="errored"]');
+    const errDetail= form.querySelector('[data-state="error-detail"]');
+
+    const show = (el, display) => { if (el) el.style.display = display; };
+    const reset = () => {
+      btn.disabled = false;
+      idleLbl.classList.remove('hidden');
+      busyLbl.classList.add('hidden');
+    };
+
+    const friendlyError = (code) => ({
+      not_configured:   'Contact form not yet configured — please call (712) 623-3764.',
+      missing_required: 'Please fill in your name and email.',
+      bad_email:        'That email address looks off — please check it.',
+      too_long:         'Message is too long — please shorten and retry.',
+      auth_failed:      'Mail server auth failed — please call the shop.',
+      email_failed:     'Email service is down — please call (712) 623-3764.',
+      network:          'Network error — please check your connection and retry.',
+    }[code] || 'Something went wrong — please call (712) 623-3764.');
+
+    form.addEventListener('submit', async (ev) => {
+      ev.preventDefault();
+      show(okMsg, 'none'); show(errMsg, 'none');
+      errDetail.classList.add('hidden'); errDetail.textContent = '';
+
+      // Native constraint check (required, email shape)
+      if (!form.checkValidity()) { form.reportValidity(); return; }
+
+      const data = Object.fromEntries(new FormData(form).entries());
+
+      btn.disabled = true;
+      idleLbl.classList.add('hidden');
+      busyLbl.classList.remove('hidden');
+
+      try {
+        const r = await fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify(data),
+        });
+        let payload = {};
+        try { payload = await r.json(); } catch {}
+
+        if (r.ok && payload.ok) {
+          show(btn, 'none');
+          show(okMsg, 'inline-flex');
+          form.reset();
+          return;
+        }
+
+        const msg = friendlyError(payload.error);
+        show(btn, 'none');
+        show(errMsg, 'inline-flex');
+        errDetail.textContent = msg;
+        errDetail.classList.remove('hidden');
+        // Allow retry after 3s by restoring button
+        setTimeout(() => { show(errMsg, 'none'); show(btn, 'inline-flex'); reset(); }, 4000);
+      } catch (err) {
+        console.error(err);
+        show(btn, 'none');
+        show(errMsg, 'inline-flex');
+        errDetail.textContent = friendlyError('network');
+        errDetail.classList.remove('hidden');
+        setTimeout(() => { show(errMsg, 'none'); show(btn, 'inline-flex'); reset(); }, 4000);
+      }
+    });
+  })();
 </script>
 
 </body>
